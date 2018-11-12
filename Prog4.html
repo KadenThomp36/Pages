@@ -206,16 +206,12 @@ function genObjectArray() {
             'birthmonth'   :parseInt(document.getElementById("birthmonth"+i).value),
             'birthyear'   :parseInt(document.getElementById("birthyear"+i).value),
             'country'   :document.getElementById("country"+i).value,
-            'lAge':function () {
-                var today = new Date();
-                var month = this.birthmonth;
-                month = this.birthmonth - 1;
-                var birthDate = new Date(this.birthyear, month, this.birthday);
-                var age = today.getFullYear() - birthDate.getFullYear();
-                var m = today.getMonth() - birthDate.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
+            'countryAge':function () {
+			var month = this.birthmonth;
+                var date = new Date();
+				var birthDate = new Date(this.birthyear, month, this.birthday);
+                var age = date.getFullYear() - birthDate.getFullYear();
+                var m = date.getMonth() - birthDate.getMonth();
                 if('China'===this.country)
                     return age + 1;
                 else
@@ -223,17 +219,88 @@ function genObjectArray() {
             },
             'lName':function () {
                 if('China'===this.country)
-                    return this.lname + ' ' + this.fname;
+                    return this.lname +" "+ this.fname;
                 else
-                    return this.fname + ' ' + this.lname;
+                    return this.fname +" "+ this.lname;
             },
             'lZodiac':function () {
                 if('China'===this.country){
-                    var cZodiacs = ["Monkey", "Cock", "Dog", "Boar", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
-                    return cZodiacs[this.birthyear % cZodiacs.length];
+                    var eastern = ["Monkey", "Cock", "Dog", "Boar", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
+                    return eastern[this.birthyear % eastern.length];
                 }else{
-                    var wZodiacs = ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"];
-					return wZodiacs[this.birthmonth - 1];
+                    var western = ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"];
+					if(this.birthmonth == 1){
+						if (this.birthday < 19)
+							return western[1];
+						else
+							return western[2];
+					}
+					if(this.birthmonth == 2){
+						if (this.birthday < 18)
+							return western[2];
+						else
+							return western[3];
+					}
+					if(this.birthmonth == 3){
+						if (this.birthday < 20)
+							return western[3];
+						else
+							return western[4];
+					}
+					if(this.birthmonth == 4){
+						if (this.birthday < 19)
+							return western[4];
+						else
+							return western[5];
+					}
+					if(this.birthmonth == 5){
+						if (this.birthday < 20)
+							return western[5];
+						else
+							return western[6];
+					}
+					if(this.birthmonth == 6){
+						if (this.birthday < 20)
+							return western[6];
+						else
+							return western[7];
+					}
+					if(this.birthmonth == 7){
+						if (this.birthday < 22)
+							return western[7];
+						else
+							return western[8];
+					}
+					if(this.birthmonth == 8){
+						if (this.birthday < 22)
+							return western[8];
+						else
+							return western[9];
+					}
+					if(this.birthmonth == 9){
+						if (this.birthday < 22)
+							return western[9];
+						else
+							return western[10];
+					}
+					if(this.birthmonth == 10){
+						if (this.birthday < 22)
+							return western[10];
+						else
+							return western[11];
+					}
+					if(this.birthmonth == 11){
+						if (this.birthday < 21)
+							return western[11];
+						else
+							return western[12];
+					}
+					if(this.birthmonth == 12){
+						if (this.birthday < 21)
+							return western[12];
+						else
+							return western[1];
+					}
                 }
             },
             'lBirthday':function() {
@@ -250,7 +317,7 @@ function genObjectArray() {
     objArray.forEach(function(e) {
         divContent += '<li>';
         divContent += JSON.stringify(e);
-        divContent += ' ... lAge() == ' + e.lAge();
+        divContent += ' ... countryAge() == ' + e.countryAge();
         divContent += ' ... lName() == ' + e.lName();
         divContent += ' ... lZodiac() == ' + e.lZodiac();
         divContent += ' ... lBirthday() == ' + e.lBirthday();
@@ -293,7 +360,7 @@ function genTable() {
         textNode = document.createTextNode(objArray[i].lBirthday());
         cell.appendChild(textNode);
         cell = row.insertCell(2);
-        textNode = document.createTextNode(objArray[i].lAge());
+        textNode = document.createTextNode(objArray[i].countryAge());
         cell.appendChild(textNode);
         cell = row.insertCell(3);
         textNode = document.createTextNode(objArray[i].lZodiac());
