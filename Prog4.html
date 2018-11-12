@@ -96,16 +96,17 @@ function addForm() {
     newelement.setAttribute("name","fname"+currentLine);
     newelement.setAttribute("id","fname"+currentLine);
     newelement.setAttribute("type","text");
+	newelement.setAttribute("placeholder", "Jane");
     newelement.setAttribute("size",10);
     if (currentLine==0) newelement.setAttribute("autofocus","autofocus");
     var fieldset1 = document.getElementById("fieldset1");
     fieldset1.appendChild(newelement);
  
     // add more fields
-    addField("fieldset1", "lname", "Last Name", "text", "", inputWidth);
-    addField("fieldset1", "birthday", "Solar Birth Day", "number", "", inputWidth);
-    addField("fieldset1", "birthmonth", "Solar Birth Month", "number", "", inputWidth);
-    addField("fieldset1", "birthyear", "Solar Birth Year", "number", "", inputWidth);
+    addField("fieldset1", "lname", "Last Name", "text", "Doe", inputWidth);
+    addField("fieldset1", "birthday", "Solar Birth Day", "number", "00", inputWidth);
+    addField("fieldset1", "birthmonth", "Solar Birth Month", "number", "00", inputWidth);
+    addField("fieldset1", "birthyear", "Solar Birth Year", "number", "0000", inputWidth);
     addSelect("fieldset1", "country", "Country", "text");
  
     // add line break
