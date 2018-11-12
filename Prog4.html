@@ -316,11 +316,13 @@ function genObjectArray() {
     document.getElementById("div2").innerHTML = divContent;
 }
 function genTable() {
+	//remove old table if the button is used twice
     var div3 = document.getElementById("div3");
     while(div3.firstChild){
         div3.removeChild(div3.firstChild);
     }  
     genObjectArray();
+	
     var table = document.createElement("table");
     table.setAttribute("id", "table1");
     table.setAttribute("class", "table table-striped table-bordered");
