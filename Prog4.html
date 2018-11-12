@@ -211,7 +211,6 @@ function genObjectArray() {
                 var date = new Date();
 				var birthDate = new Date(this.birthyear, month, this.birthday);
                 var age = date.getFullYear() - birthDate.getFullYear();
-                var m = date.getMonth() - birthDate.getMonth();
                 if('China'===this.country)
                     return age + 1;
                 else
